@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CustomInput from "../../../component/CustomInput";
 import CustomSelect from "../../../component/CustomSelect";
 import { useState } from "react";
@@ -19,8 +19,7 @@ export default function SalaryInfo({ getInfoData }: InfoData) {
   };
 
   return (
-    <Box mt={4}>
-      <Typography className="info-title">Basic Salary Information</Typography>
+    <Box mb={5}>
       <Grid container rowSpacing={2} columnSpacing={6}>
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect

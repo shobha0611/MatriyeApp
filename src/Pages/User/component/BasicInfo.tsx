@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CustomInput from "../../../component/CustomInput";
 import CustomSelect from "../../../component/CustomSelect";
 import {
@@ -26,9 +26,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
   };
 
   return (
-    <Box>
-      <Typography className="info-title">Basic Information</Typography>
-      <Box>Profile</Box>
+    <Box mb={5}>
       <Grid container rowSpacing={2} columnSpacing={6}>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput

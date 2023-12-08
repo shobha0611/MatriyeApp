@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CustomInput from "../../../component/CustomInput";
 import CustomSelect from "../../../component/CustomSelect";
 import { PF_CONTRIBUTION, PF_RATE } from "../../../constant";
@@ -28,8 +28,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
     Number(infoData?.employeepfRate?.split("%")[0]);
 
   return (
-    <Box mt={4}>
-      <Typography className="info-title">PR Information</Typography>
+    <Box mb={5}>
       <Grid container rowSpacing={2} columnSpacing={6}>
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect

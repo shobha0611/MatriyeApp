@@ -9,16 +9,15 @@ import UserForm from "./Pages/User/UserForm";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <UserForm/>,
-    errorElement:<div>Error</div>
+    element: <UserTable />,
+    errorElement: <div>Error</div>,
   },
-    {
-      path: "/table",
-      element: <UserTable/>,
-      errorElement:<div>Error</div>
-    },
-    
-  ]);
+  {
+    path: "/adduser",
+    element: <UserForm />,
+    errorElement: <div>Error</div>,
+  },
+]);
 
 export default function App(){
     return (    <RouterProvider router={router} />

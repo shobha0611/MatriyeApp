@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CustomInput from "../../../component/CustomInput";
 import CustomSelect from "../../../component/CustomSelect";
 import { ESIC_CONTRIBUTION, ESIC_RATE } from "../../../constant";
@@ -24,8 +24,7 @@ export default function ESICInfo({ getInfoData }: InfoData) {
     Number(infoData?.additionalRate?.split("%")[0]);
 
   return (
-    <Box mt={4}>
-      <Typography className="info-title">ESIC Information</Typography>
+    <Box mb={5}>
       <Grid container rowSpacing={2} columnSpacing={6}>
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect

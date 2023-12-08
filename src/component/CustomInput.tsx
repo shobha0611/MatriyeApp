@@ -1,23 +1,36 @@
 import { TextField, TextFieldProps, styled } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface InputProps {
   label: String;
+  defaultValue?: String;
   readOnly?: boolean | undefined;
   handleChange(value: String): void;
 }
 
-const CustomInput = ({ label, readOnly = false, handleChange }: InputProps) => {
-  const [value, setValue] = useState("");
+const CustomInput = ({
+  label,
+  defaultValue,
+  readOnly = false,
+  handleChange,
+}: InputProps) => {
+  const [value, setValue] = useState<String>(defaultValue || "");
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     handleChange(event.target.value);
   };
 
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
+
   return (
     <TextField
       label={label}
+      value={value}
       variant="standard"
       error
       fullWidth

@@ -1,4 +1,3 @@
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddIcon from "@mui/icons-material/Add";
 import { GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { getAllUsersList, deleteUser } from "../../appconfig";
 
 import CustomDataGrid from "../../component/CustomDataGrid";
+import MoreDetailsTooltip from "./component/MoreDetailsTooltip";
 
 const columns: GridColDef[] = [
   {
@@ -56,11 +56,11 @@ const columns: GridColDef[] = [
     headerName: "Action",
     sortable: false,
     renderCell: (params: any) => {
-      const onClick = (e: any) => {
-        const currentRow = params.row;
-        return alert(JSON.stringify(currentRow, null, 4));
-      };
-      return <MoreVertIcon sx={{ margin: "auto" }} />;
+      return (
+        <Box sx={{ margin: "auto" }}>
+          <MoreDetailsTooltip userId={params.id} />
+        </Box>
+      );
     },
   },
 ];
@@ -89,7 +89,9 @@ export default function UserTable() {
   };
 
   const fetchMyAPI = async () => {
-    let response = await getAllUsersList();
+    let response = await getAllUsersList().catch((err) => {
+      toast.error(err?.response?.data?.msg);
+    });
     if (response?.status === 200) {
       const data = response?.data?.results?.map((user: any, idx: number) => ({
         id: user?._id,
@@ -99,7 +101,7 @@ export default function UserTable() {
         phoneNo: user?.phoneNumber,
         city: user?.city,
         crmUser: user?.crmUser,
-        status: idx % 2 === 0 ? "active" : "inactive",
+        status: idx % 2 === 0 ? "Active" : "Inactive",
       }));
       setUserData(data);
     }

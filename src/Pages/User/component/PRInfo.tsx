@@ -6,11 +6,14 @@ import { useState } from "react";
 import CustomReadOnlyInput from "../../../component/CustomReadOnlyInput";
 
 interface InfoData {
+  userDetails: any;
   getInfoData(data: any): void;
 }
 
-export default function PRInfo({ getInfoData }: InfoData) {
-  const [infoData, setInfoData] = useState<any>({});
+export default function PRInfo({ getInfoData, userDetails }: InfoData) {
+  const [infoData, setInfoData] = useState<any>(
+    { ...userDetails?.prInfo } || {}
+  );
 
   const handleInputChange = (value: String, key: any) => {
     let keydata = `${key}`;
@@ -20,12 +23,12 @@ export default function PRInfo({ getInfoData }: InfoData) {
   };
 
   const employerTotalRate =
-    Number(infoData?.employeradditionRate?.split("%")[0]) +
-    Number(infoData?.employerpfRate?.split("%")[0]);
+    Number(userDetails?.prInfo?.employeradditionRate?.split("%")[0]) +
+    Number(userDetails?.prInfo?.employerpfRate?.split("%")[0]);
 
   const employeeTotalRate =
-    Number(infoData?.employeeadditionRate?.split("%")[0]) +
-    Number(infoData?.employeepfRate?.split("%")[0]);
+    Number(userDetails?.prInfo?.employeeadditionRate?.split("%")[0]) +
+    Number(userDetails?.prInfo?.employeepfRate?.split("%")[0]);
 
   return (
     <Box mb={5}>
@@ -33,6 +36,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="PF Contribution"
+            defaultValue={userDetails?.prInfo?.contribution}
             options={PF_CONTRIBUTION}
             handleChange={(value: String) =>
               handleInputChange(value, "contribution")
@@ -41,6 +45,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         </Grid>
         <Grid item xs={1} sm={6} md={4}>
           <CustomInput
+            defaultValue={userDetails?.prInfo?.pfNumber}
             label="PF Number"
             handleChange={(value: String) =>
               handleInputChange(value, "pfNumber")
@@ -52,6 +57,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Employer PF Rate"
+            defaultValue={userDetails?.prInfo?.employerpfRate}
             options={PF_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "employerpfRate")
@@ -61,6 +67,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Additional Rate"
+            defaultValue={userDetails?.prInfo?.employeradditionRate}
             options={PF_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "employeradditionRate")
@@ -76,6 +83,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Employee PF Rate"
+            defaultValue={userDetails?.prInfo?.employeeadditionRate}
             options={PF_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "employeeadditionRate")
@@ -85,6 +93,7 @@ export default function PRInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Additional Rate"
+            defaultValue={userDetails?.prInfo?.employeepfRate}
             options={PF_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "employeepfRate")

@@ -10,12 +10,22 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <UserTable />,
-    errorElement: <div>Error</div>,
+    errorElement: <div className="page-container">Error</div>,
   },
   {
     path: "/adduser",
     element: <UserForm />,
-    errorElement: <div>Error</div>,
+    errorElement: <div className="page-container">Error</div>,
+  },
+  {
+    path: "/user/edit/:id",
+    element: <UserForm isEdit={true} />,
+    errorElement: <div className="page-container">Error</div>,
+  },
+  {
+    path: "/user/view/:id",
+    element: <UserForm isShow={true} />,
+    errorElement: <div className="page-container">Error</div>,
   },
 ]);
 

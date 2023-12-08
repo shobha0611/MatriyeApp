@@ -38,3 +38,7 @@
     border-radius: 1 !important;
     text-transform: capitalize !important;
 }
+
+.divider{
+  width:100%
+}

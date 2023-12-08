@@ -1,6 +1,6 @@
 import { InputLabel, MenuItem, FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface OptionProps {
@@ -10,20 +10,28 @@ interface OptionProps {
 interface InputProps {
   label: String;
   options: OptionProps[];
+  defaultValue?: any;
   handleChange(value: String): void;
 }
 
 const CustomSelect: React.FC<InputProps> = ({
   label,
   options,
+  defaultValue,
   handleChange,
 }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(defaultValue || "");
 
   const handleOnChange = (event: SelectChangeEvent) => {
     setValue(event.target.value);
     handleChange(event.target.value);
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
 
   return (
     <div>

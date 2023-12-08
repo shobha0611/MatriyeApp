@@ -6,11 +6,14 @@ import { useState } from "react";
 import CustomReadOnlyInput from "../../../component/CustomReadOnlyInput";
 
 interface InfoData {
+  userDetails: any;
   getInfoData(data: any): void;
 }
 
-export default function ESICInfo({ getInfoData }: InfoData) {
-  const [infoData, setInfoData] = useState<any>({});
+export default function ESICInfo({ getInfoData, userDetails }: InfoData) {
+  const [infoData, setInfoData] = useState<any>(
+    { ...userDetails?.esicInfo } || {}
+  );
 
   const handleInputChange = (value: String, key: any) => {
     let keydata = `${key}`;
@@ -20,8 +23,8 @@ export default function ESICInfo({ getInfoData }: InfoData) {
   };
 
   const totalRate =
-    Number(infoData?.esicrate?.split("%")[0]) +
-    Number(infoData?.additionalRate?.split("%")[0]);
+    Number(userDetails?.esicInfo?.esicrate?.split("%")[0]) +
+    Number(userDetails?.esicInfo?.additionalRate?.split("%")[0]);
 
   return (
     <Box mb={5}>
@@ -29,6 +32,7 @@ export default function ESICInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="ESIC Contribution"
+            defaultValue={userDetails?.esicInfo?.esicContribution}
             options={ESIC_CONTRIBUTION}
             handleChange={(value: String) =>
               handleInputChange(value, "esicContribution")
@@ -38,6 +42,7 @@ export default function ESICInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomInput
             label="ESIC No."
+            defaultValue={userDetails?.esicInfo?.esicNo}
             handleChange={(value: String) => handleInputChange(value, "esicNo")}
           />
         </Grid>
@@ -47,6 +52,7 @@ export default function ESICInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Employee ESIC Rate"
+            defaultValue={userDetails?.esicInfo?.esicrate}
             options={ESIC_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "esicrate")
@@ -56,6 +62,7 @@ export default function ESICInfo({ getInfoData }: InfoData) {
         <Grid item xs={1} sm={6} md={4}>
           <CustomSelect
             label="Additional Rate"
+            defaultValue={userDetails?.esicInfo?.additionalRate}
             options={ESIC_RATE}
             handleChange={(value: String) =>
               handleInputChange(value, "additionalRate")

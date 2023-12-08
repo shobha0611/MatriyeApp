@@ -13,11 +13,12 @@ import {
 import { useState } from "react";
 
 interface InfoData {
+  userDetails: any;
   getInfoData(data: any): void;
 }
 
-export default function BasicInfo({ getInfoData }: InfoData) {
-  const [infoData, setInfoData] = useState({});
+export default function BasicInfo({ userDetails, getInfoData }: InfoData) {
+  const [infoData, setInfoData] = useState({ ...userDetails } || {});
   const handleInputChange = (value: String, key: any) => {
     let keydata = `${key}`;
     const newData = { ...infoData, [keydata]: value };
@@ -31,6 +32,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput
             label="Full Name"
+            defaultValue={userDetails["fullName"]}
             handleChange={(value: String) =>
               handleInputChange(value, "fullName")
             }
@@ -39,6 +41,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput
             label="Mobile Number"
+            defaultValue={userDetails["phoneNumber"]}
             handleChange={(value: String) =>
               handleInputChange(value, "phoneNumber")
             }
@@ -47,18 +50,21 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput
             label="Email Id"
+            defaultValue={userDetails["email"]}
             handleChange={(value: String) => handleInputChange(value, "email")}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput
             label="Date of Birth"
+            defaultValue={userDetails["dob"]}
             handleChange={(value: String) => handleInputChange(value, "dob")}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomInput
             label="Position"
+            defaultValue={userDetails["position"]}
             handleChange={(value: String) =>
               handleInputChange(value, "position")
             }
@@ -67,6 +73,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="Department"
+            defaultValue={userDetails["department"] || ""}
             options={DEPT_OPTIONS}
             handleChange={(value: String) =>
               handleInputChange(value, "department")
@@ -76,6 +83,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="CRM User"
+            defaultValue={userDetails["crmUser"] || ""}
             options={CRM_USER}
             handleChange={(value: String) =>
               handleInputChange(value, "crmUser")
@@ -85,6 +93,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="Role"
+            defaultValue={userDetails["role"] || ""}
             options={ROLE}
             handleChange={(value: String) => handleInputChange(value, "role")}
           />
@@ -93,6 +102,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
           <CustomSelect
             label="Assign Caller Id"
             options={ASSIGN_CALLER_Id}
+            defaultValue={userDetails["assignCallerId"] || ""}
             handleChange={(value: String) =>
               handleInputChange(value, "assignCallerId")
             }
@@ -101,6 +111,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="Country"
+            defaultValue={userDetails["country"] || ""}
             options={COUNTRY}
             handleChange={(value: String) =>
               handleInputChange(value, "country")
@@ -110,6 +121,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="State"
+            defaultValue={userDetails["state"] || ""}
             options={STATE}
             handleChange={(value: String) => handleInputChange(value, "state")}
           />
@@ -117,6 +129,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <CustomSelect
             label="City"
+            defaultValue={userDetails["city"] || ""}
             options={CITY}
             handleChange={(value: String) => handleInputChange(value, "city")}
           />
@@ -124,6 +137,7 @@ export default function BasicInfo({ getInfoData }: InfoData) {
         <Grid item xs={12} sm={12} md={7}>
           <CustomInput
             label="Address"
+            defaultValue={userDetails["address"] || ""}
             handleChange={(value: String) =>
               handleInputChange(value, "address")
             }
